@@ -1,5 +1,6 @@
 import bs4
 from mdict_utils.base.readmdict import MDX
+from mdict_utils.base.writemdict import MDictWriter
 import tqdm
 import logging
 import datetime
@@ -16,7 +17,7 @@ logging.basicConfig(filename=log_absolute_path,
 
 item_limit = 100
 my_mdx = MDX('cc-cedict_enlarged_characters.mdx')
-output_file = open('output.txt', 'w')
+dictionary = {}
 
 def build_html(mdx_value):
     has_zh_hant = False
@@ -55,7 +56,7 @@ def build_html(mdx_value):
     # ------------------------------
     single_definition_soup = bs4.BeautifulSoup("""
     <head>
-        <link rel="stylesheet" href="cc-cedict-enlarged-characters.css">
+        <link rel="stylesheet" href="cc-cedict-custom.css">
     </head>
     <body>
         <div class="lexeme-container">
@@ -103,25 +104,22 @@ for key, value in tqdm.tqdm(my_mdx.items(), total=my_mdx.__len__()):
     # ------------------------------
     # Write entries
     # ------------------------------
-    output_file.write(key_decoded)
-    output_file.write('\n')
     if value_decoded.startswith('@@@LINK='):
-        output_file.write(value_decoded.rstrip())
+        dictionary[key_decoded] = value_decoded
     elif value_decoded.startswith('<div'):
         value_decoded = build_html(value_decoded)
-        output_file.write("".join(line.strip() for line in value_decoded.splitlines()))
+        dictionary[key_decoded] = "".join(line.strip() for line in value_decoded.splitlines())
     elif value_decoded.startswith('#VALUE!'):
-        # The word "几号" has a definition called "几号".
+        # The word "几号" has a definition called "#VALUE!".
         continue
     else:
         raise Exception("This shouldn't happen.")
-    output_file.write('\n')
-    output_file.write('</>')
-    output_file.write('\n')
-    # For testing purposes
-    # item_limit -= 1
-    # if item_limit == 0:
-    #   break
 
+writer = MDictWriter(
+    dictionary,
+    title="CC-CEDICT (custom CSS)",
+    description="""This dictionary is a modification of "CC-CEDICT (with enlarged characters)" which can be downloaded (as of time of writing 2026-05-27T00:19:20+0000) from https://github.com/lxs602/Chinese-Mandarin-Dictionaries/tree/main/CC-CEDICT%20(with%20enlarged%20characters).""")
 
-
+outfile = open("cc-cedict-custom-css.mdx", "wb")
+writer.write(outfile)
+outfile.close()
