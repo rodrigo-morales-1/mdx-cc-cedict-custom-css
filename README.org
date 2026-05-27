@@ -1,8 +1,6 @@
 The file =main.py= contains Python code to create a new =*.mdx= dictionary from the dictionary =cc-cedict_enlarged_characters.mdx= which can be downloaded at [[https://github.com/lxs602/Chinese-Mandarin-Dictionaries/tree/main/CC-CEDICT%20(with%20enlarged%20characters)][lxs602/Chinese-Mandarin-Dictionaries]] . The dictionary that is created by =main.py= define containers in the HTML code to allow the user to customize the appearance.
 
-The two code blocks below show the difference between .
-
-HTML code for the entry "舞会" in =cc-cedict_enlarged_characters.mdx=
+The first code block below shows the definition of the word "舞会" in =cc-cedict_enlarged_characters.mdx=. The second code block below shows its definition in =cc-cedict-custom-css.mdx=.
 
 #+BEGIN_SRC html
 <div style='border: 1px solid; padding: 8px'>
