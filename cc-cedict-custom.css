@@ -1,0 +1,59 @@
+.lexeme-container {
+    border: 1px solid black;
+}
+
+.zh-hans-syllable {
+    font-size: 3rem;
+    display: inline-block;
+}
+
+.zh-hant-syllable {
+    font-size: 3rem;
+    display: inline-block;
+}
+
+.pinyin-syllable {
+    font-size: 3rem;
+    display: inline-block;
+}
+
+.pinyin-syllable:not(:last-child) {
+    padding-right: 10px;
+}
+
+/*
+The colors of the syllables will be incorrect for words whose number
+of characters doesn't equal the number of syllables. (e.g. "21" is
+represented by two characters but its pronunciation includes 3
+syllables: èr shí yī)
+
+Use the following prompt to find proper colors for the syllables.
+
+#+BEGIN_SRC prompt
+   Set the color for each syllable to very differentiable colors so
+   that they are easy to read for the human eye. Consider that this
+   style will be used on a page that will be read by people that have
+   color blindness https://en.wikipedia.org/wiki/Color_blindness
+
+  .syllable-1 { color: <insert-color-here>; }
+  .syllable-2 { color: <insert-color-here>; }
+  .syllable-3 { color: <insert-color-here>; }
+  .syllable-4 { color: <insert-color-here>; }
+  .syllable-5 { color: <insert-color-here>; }
+  .syllable-6 { color: <insert-color-here>; }
+  .syllable-7 { color: <insert-color-here>; }
+  .syllable-8 { color: <insert-color-here>; }
+  .syllable-9 { color: <insert-color-here>; }
+  .syllable-10 { color: <insert-color-here>; }
+#+END_SRC
+ */
+.syllable-1  { color: #0072B2; } /* Strong Blue (Safe across Protan/Deuteran/Tritan) */
+.syllable-2  { color: #E69F00; } /* Bright Orange (High contrast against the blue) */
+.syllable-3  { color: #111111; } /* Near Black (Deep anchor tone) */
+.syllable-4  { color: #56B4E9; } /* Sky Blue (Light value) */
+.syllable-5  { color: #D55E00; } /* Vermilion / Dark Red-Orange */
+.syllable-6  { color: #009E73; } /* Bluish Green (Safe green for red-blind eyes) */
+.syllable-7  { color: #777777; } /* Medium Muted Gray */
+.syllable-8  { color: #CC79A7; } /* Reddish Purple / Mauve */
+.syllable-9  { color: #004949; } /* Very Dark Teal */
+.syllable-10 { color: #F0E442; } /* Darkened Yellow (Optimized for light backgrounds) */
