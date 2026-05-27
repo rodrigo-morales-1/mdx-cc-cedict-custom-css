@@ -1,0 +1,99 @@
+The file =main.py= contains Python code to create a new =*.mdx= dictionary from the dictionary =cc-cedict_enlarged_characters.mdx= which can be downloaded at [[https://github.com/lxs602/Chinese-Mandarin-Dictionaries/tree/main/CC-CEDICT%20(with%20enlarged%20characters)][lxs602/Chinese-Mandarin-Dictionaries]] . The dictionary that is created by =main.py= define containers in the HTML code to allow the user to customize the appearance.
+
+The two code blocks below show the difference between .
+
+HTML code for the entry "舞会" in =cc-cedict_enlarged_characters.mdx=
+
+#+BEGIN_SRC html
+<div style='border: 1px solid; padding: 8px'>
+    <div>
+        <div style='display: inline-block'>
+            <br>
+            <span style='color:green'>
+                <font size=+3>舞
+                </font>
+            </span>
+            <span style='color:blue'>
+                <font size=+3>会
+            </span>
+        </div>
+        </font>&nbsp;/&nbsp;
+        <div style='display: inline-block'>
+            <span style='color:green'>
+                <font size=+3>舞
+                </font>
+            </span>
+            <span style='color:blue'>
+                <font size=+3>會
+            </span>
+        </div>
+        </font>
+        <div style='display: inline-block'>
+            <span style='color:green'>
+                <font size=+1>wǔ
+                </font>
+            </span>
+            <span style='color:blue'>
+                <font size=+1>huì
+            </span>
+        </div>
+        </font>
+    </div>
+    <div>
+        <ul>
+	    <li>dance
+            </li>
+            <li>ball
+            </li>
+            <li>party
+            </li>
+            <li>CL:
+                <font size=+1>場 | 场
+                </font> [chang3]
+            </li>
+        </ul>
+    </div>
+</div>
+#+END_SRC
+
+HTML code for the entry "舞会" in =cc-cedict-custom-css.mdx=
+
+#+BEGIN_SRC html
+<head>
+    <link href="cc-cedict-custom.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="lexeme-container">
+        <div class="zh-hans-container">
+            <div class="zh-hans-syllable syllable-1">舞</div>
+            <div class="zh-hans-syllable syllable-2">会</div>
+        </div>
+        <div class="zh-hant-container">
+            <div class="zh-hant-syllable syllable-1">舞</div>
+            <div class="zh-hant-syllable syllable-2">會</div>
+        </div>
+        <div class="pinyin-container">
+            <div class="pinyin-syllable syllable-1">wǔ</div>
+            <div class="pinyin-syllable syllable-2">huì</div>
+        </div>
+        <ul class="senses-container">
+            <li>dance</li>
+            <li>ball</li>
+            <li>party</li>
+            <li>CL:場 | 场 [chang3]</li>
+        </ul>
+    </div>
+</body>
+#+END_SRC
+
+* Instructions for running the Python script
+
+1. Download the file =cc-cedict_enlarged_characters.mdx= from [[https://github.com/lxs602/Chinese-Mandarin-Dictionaries/tree/main/CC-CEDICT%20(with%20enlarged%20characters)][lxs602/Chinese-Mandarin-Dictionaries]]
+
+1. Run the Python script to create the file =mdx-entries.txt=
+
+2. Run the command below to create =cc-cedict-custom-css.mdx=
+
+#+BEGIN_SRC sh
+mdict --title mdx-title.txt --description mdx-description.txt -a mdx-entries.txt cc-cedict-custom-css.mdx
+#+END_SRC
