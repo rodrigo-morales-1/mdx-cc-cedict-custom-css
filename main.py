@@ -58,28 +58,30 @@ def build_html(mdx_value):
         <link rel="stylesheet" href="cc-cedict-enlarged-characters.css">
     </head>
     <body>
-        <div id="zh-hans-container">
+        <div class="lexeme-container">
+            <div class="zh-hans-container">
+            </div>
+            <div class="zh-hant-container">
+            </div>
+            <div class="pinyin-container">
+            </div>
+            <ul class="senses-container">
+            </ul>
         </div>
-        <div id="zh-hant-container">
-        </div>
-        <div id="pinyin-container">
-        </div>
-        <ul id="senses-container">
-        </ul>
     </body>
     """, 'html.parser')
-    zh_hans_container = single_definition_soup.find(id="zh-hans-container")
-    zh_hant_container = single_definition_soup.find(id="zh-hant-container")
-    pinyin_container = single_definition_soup.find(id="pinyin-container")
-    senses_container = single_definition_soup.find(id="senses-container")
+    zh_hans_container = single_definition_soup.select_one(".zh-hans-container")
+    zh_hant_container = single_definition_soup.select_one(".zh-hant-container")
+    pinyin_container = single_definition_soup.select_one(".pinyin-container")
+    senses_container = single_definition_soup.select_one(".senses-container")
     for index, item in enumerate(zh_hans_list):
         new_div = soup.new_tag('div')
-        new_div['class'] = f'zh-hans-syllable zh-hans-syllable-{index+1}'
+        new_div['class'] = f'zh-hans-syllable syllable-{index+1}'
         new_div.string = item
         zh_hans_container.append(new_div)
     for index, item in enumerate(pinyin_list):
         new_div = soup.new_tag('div')
-        new_div['class'] = f'pinyin-syllable pinyin-syllable-{index+1}'
+        new_div['class'] = f'pinyin-syllable syllable-{index+1}'
         new_div.string = item
         pinyin_container.append(new_div)
     for item in senses_list:
@@ -89,7 +91,7 @@ def build_html(mdx_value):
     if has_zh_hant:
         for index, item in enumerate(zh_hant_list):
             new_div = soup.new_tag('div')
-            new_div['class'] = f'zh-hant-syllable zh-hant-syllable-{index+1}'
+            new_div['class'] = f'zh-hant-syllable syllable-{index+1}'
             new_div.string = item
             zh_hant_container.append(new_div)
     return str(single_definition_soup)
